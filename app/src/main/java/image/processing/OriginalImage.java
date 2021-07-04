@@ -14,7 +14,7 @@ public class OriginalImage extends JPanel {
 	public OriginalImage() {
 		
 		setBounds(25, 25, Main.PANEL_WIDTH, Main.PANEL_HEIGHT);
-		setBackground(Color.LIGHT_GRAY);
+		setBackground(Color.WHITE);
 		setLayout(null);
 		this.setVisible(true);
 		

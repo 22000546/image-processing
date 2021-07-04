@@ -145,16 +145,8 @@ public class Main extends JFrame implements MouseMotionListener {
 		JMenuItem load = new JMenuItem("불러오기");
 		load.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				imagePath = ImageLoader.loadImage();
-				if(imagePath == null) {
-					JOptionPane.showMessageDialog(null, "");
-				} else {
-					File input = new File(imagePath);
-					try {
-						originalImage = ImageIO.read(input);
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+				originalImage = ImageLoader.loadImage();
+				if(originalImage != null) {
 					original.setImage(originalImage);
 					original.repaint();
 					edited.setImage(originalImage);;
@@ -174,7 +166,7 @@ public class Main extends JFrame implements MouseMotionListener {
 				try {
 					ImageLoader.saveImage(edited.getImage());
 				} catch (IOException e1) {
-					e1.printStackTrace();
+					e1.getMessage();
 				}
 			}
 		});
