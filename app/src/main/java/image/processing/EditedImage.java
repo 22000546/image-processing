@@ -15,7 +15,7 @@ public class EditedImage extends JPanel {
 		
 		setSize(Main.PANEL_WIDTH, Main.PANEL_HEIGHT);
 		setLocation(Main.PANEL_WIDTH+50, 25);
-		setBackground(Color.WHITE);
+		setBackground(new Color(175, 162, 186));
 		setLayout(null);
 		
 	}
