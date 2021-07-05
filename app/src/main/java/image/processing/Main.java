@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
@@ -24,6 +25,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -143,6 +145,7 @@ public class Main extends JFrame implements MouseMotionListener {
 		menuBar.add(edit);
 		
 		JMenuItem load = new JMenuItem("불러오기");
+		load.setAccelerator(KeyStroke.getKeyStroke('L' ,KeyEvent.VK_CONTROL));
 		load.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				originalImage = ImageLoader.loadImage();
@@ -161,6 +164,7 @@ public class Main extends JFrame implements MouseMotionListener {
 		file.add(load);
 		
 		JMenuItem save = new JMenuItem("저장하기");
+		save.setAccelerator(KeyStroke.getKeyStroke('S' ,KeyEvent.VK_CONTROL));
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -172,11 +176,23 @@ public class Main extends JFrame implements MouseMotionListener {
 		});
 		file.add(save);
 		
+		JMenuItem exit = new JMenuItem("종료");
+		file.add(exit);
+		exit.setAccelerator(KeyStroke.getKeyStroke('q' ,KeyEvent.VK_CONTROL));
+		exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
 		JMenuItem undo = new JMenuItem("뒤로 가기");
+		undo.setAccelerator(KeyStroke.getKeyStroke('Z' ,KeyEvent.VK_CONTROL));
 		undo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(undoList.isEmpty() || undoList.size() == 1) {
 					JOptionPane.showMessageDialog(null, "뒤로 갈 항목이 없습니다.");	
+				} else if(buttonMode != 0) {
+					JOptionPane.showMessageDialog(null, "버튼 모드를 해제하고 사용해주십시오. ");
 				} else {
 					redoList.add(undoList.remove(undoList.size()-1));
 					BufferedImage img = undoList.get(undoList.size()-1);
@@ -188,6 +204,7 @@ public class Main extends JFrame implements MouseMotionListener {
 		edit.add(undo);
 		
 		JMenuItem redo = new JMenuItem("앞으로 가기");
+		redo.setAccelerator(KeyStroke.getKeyStroke('R' ,KeyEvent.VK_CONTROL));
 		redo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(redoList.isEmpty() || redoList.size() == 1) {
